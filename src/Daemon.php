@@ -29,6 +29,8 @@ class Daemon
 
     /**
      * playlistVideos
+     *
+     * Grabs the videos from a given YouTube playlist.
      * 
      * @param string $playlistId The id of the YouTube playlist.
      * @param int $count (Optional) The number of items to grab; all
