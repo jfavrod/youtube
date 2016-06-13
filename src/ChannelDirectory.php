@@ -5,9 +5,12 @@ namespace Epoque\YouTube;
 class ChannelDirectory
 {
     private static $channels = [
+        'AdamKokesh' => 'UC0RJJ_Wm7jyOU9eY10LgcwA',
         'Jan Helfeld' => 'UCwYtzX-vfZ2krwYqVQHOvSQ',
         'Peter Schiff' => 'UCIjuLiLHdFxYtFmWlbTGQRQ',
         'Stefan Molyneux' => 'UCC3L8QaxqEGUiBC252GHy3w',
+        'The Rubin Report' => 'UCJdKr0Bgd_5saZYqLCa9mng',
+        'The Young Turks' => 'UC1yBKRuGpC1tSM73A0ZjYjQ',
         'TomWoodsTV' => 'UCsgWR55UyAiFarZYl1u1l9Q'
     ];
 
