@@ -17,7 +17,7 @@ class Video
         $this->title = $snippet->title;
         $this->description = $snippet->description;
 
-        $query = Daemon::$url.'/videos?part=player&id='.$this->id.'&key='.Daemon::$key;
+        $query = Daemon::$config['url'].'/videos?part=player&id='.$this->id.'&key='.Daemon::$config['key'];
         $this->embedHtml = json_decode(file_get_contents($query))->items[0]->player->embedHtml;
     }
 }

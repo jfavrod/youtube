@@ -4,25 +4,42 @@ namespace Epoque\YouTube;
 use Epoque\YouTube\Video;
 
 
-class Daemon
-{
-    public static $url = 'https://www.googleapis.com/youtube/v3';
-    public static $key;
-    public static $channelId;
+/**
+ * Daemon
+ * 
+ * The static master class for working with the YouTube API.
+ */
 
+class Daemon
+{    
+    private static $defaults = [
+        'url' => 'https://www.googleapis.com/youtube/v3',
+        "key" => '',
+        'channelId' => ''
+    ];
+
+    public static $config = [];
+
+
+    /**
+     * init
+     * 
+     * (Re)initalize the Daemon class.
+     * 
+     * @param assoc_array $spec Key value pairs for setting the Daemon
+     * class data members.
+     */
 
     public static function init($spec=[])
     {
-        if (array_key_exists('url', $spec)) {
-            self::$url = $spec['url'];
+        foreach (self::$defaults as $dkey => $dval) {
+            self::$config[$dkey] = $dval;
         }
-
-        if (array_key_exists('key', $spec)) {
-            self::$key = $spec['key'];
-        }
-
-        if (array_key_exists('channelId', $spec)) {
-            self:$channelId = $spec['channelId'];
+        
+        foreach ($spec as $skey => $sval) {
+            if (array_key_exists($skey, self::$config)) {
+                self::$config[$skey] = $sval;
+            }
         }
     }
 
@@ -45,8 +62,8 @@ class Daemon
         $videos = [];
         $totalVideos = 0;
 
-        $query = self::$url.'/playlistItems?part=snippet&playlistId=' .
-            $playlistId.'&key='.self::$key;
+        $query = self::$config['url'].'/playlistItems?part=snippet&playlistId=' .
+            $playlistId.'&key='.self::$config['key'];
 
         if ($count > 0) {
             $totalVideos =
@@ -64,6 +81,20 @@ class Daemon
         }
 
         return $videos;
+    }
+
+
+    public function __toString()
+    {
+        $string = "YouTube Daemon {\n";
+        
+        foreach (self::$config as $ckey => $cval) {
+            $string .= "    $ckey: $cval\n";
+        }
+        
+        $string .= "}\n";
+        
+        return $string;
     }
 }
 
